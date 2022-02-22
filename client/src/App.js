@@ -1,20 +1,31 @@
-import { useState, useEffect } from 'react'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+
 import './App.css'
 
-import QuoteList from './components/QuoteList'
+import Login from './pages/login/Login'
+import Signup from './pages/signup/Signup'
+import Dashboard from './pages/dashboard/Dashboard'
+import Navbar from './components/Navbar'
 
 function App() {
-  const [data, setData] = useState(null)
-
-  useEffect(() => {
-    fetch('/api/quotes')
-      .then((res) => res.json())
-      .then((data) => setData(data))
-  }, [])
-
   return (
     <div className='App'>
-      {!data ? <p>'Loading...'</p> : <QuoteList quotes={data} />}
+      <BrowserRouter>
+        <Navbar />
+        <div className='container'>
+          <Switch>
+            <Route exact path='/'>
+              <Dashboard />
+            </Route>
+            <Route path='/login'>
+              <Login />
+            </Route>
+            <Route path='/signup'>
+              <Signup />
+            </Route>
+          </Switch>
+        </div>
+      </BrowserRouter>
     </div>
   )
 }
