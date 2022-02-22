@@ -1,22 +1,20 @@
 import { useState, useEffect } from 'react'
-import logo from './logo.svg'
 import './App.css'
+
+import QuoteList from './components/QuoteList'
 
 function App() {
   const [data, setData] = useState(null)
 
   useEffect(() => {
-    fetch('/api')
+    fetch('/api/quotes')
       .then((res) => res.json())
-      .then((data) => setData(data.message))
+      .then((data) => setData(data))
   }, [])
 
   return (
     <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>{!data ? 'Loading...' : data}</p>
-      </header>
+      {!data ? <p>'Loading...'</p> : <QuoteList quotes={data} />}
     </div>
   )
 }
