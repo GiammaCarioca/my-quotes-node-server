@@ -1,7 +1,14 @@
-const quotes = require('../quotes.json')
+const db = require('../firebase/config')
 
-function getAllQuotes(req, res) {
-  res.json(quotes)
+async function getAllQuotes(req, res) {
+  const quotes = await db.collection('quotes').get()
+
+  const quotesData = quotes.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }))
+
+  return res.json(quotesData)
 }
 
 module.exports = {

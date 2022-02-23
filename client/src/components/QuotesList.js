@@ -14,8 +14,8 @@ function QuotesList() {
       {!data && <p>'Loading...'</p>}
       {data && (
         <ul>
-          {data.map((quote, idx) => (
-            <li key={idx}>{quote}</li>
+          {data.map((quote) => (
+            <li key={quote.id}>{quote.text}</li>
           ))}
         </ul>
       )}

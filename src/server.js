@@ -2,6 +2,9 @@ const express = require('express')
 const quotesRouter = require('./routes/quotesRoutes')
 const usersRouter = require('./routes/usersRoutes')
 
+//Importing Database
+const firebaseDB = require('./firebase/config')
+
 const PORT = process.env.PORT || 3001
 
 const path = require('path')
@@ -18,12 +21,11 @@ function checkAuth(req, res, next) {
   }
 }
 
-// Have Node serve the files for our built React app
-app.use('/api/quotes', quotesRouter)
-app.use('/', usersRouter)
-app.use('/', checkAuth)
+app.use('/api/quotes', checkAuth, quotesRouter)
+app.use('/', checkAuth, usersRouter)
 
 if (process.env.NODE_ENV) {
+  // Have Node serve the files for our built React app
   app.use(express.static(path.resolve(__dirname, '../client/build')))
 
   // All other GET requests not handled before will return our React app
