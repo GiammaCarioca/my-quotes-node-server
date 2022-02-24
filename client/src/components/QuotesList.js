@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+// import { projectAuth } from '../firebase/config'
 
 function QuotesList() {
   const [data, setData] = useState(null)
@@ -8,6 +9,32 @@ function QuotesList() {
       .then((res) => res.json())
       .then((data) => setData(data))
   }, [])
+
+  // async function fetchFromAPI() {
+  //   const user = projectAuth.currentUser
+
+  //   if (!user) return
+
+  //   const token = await user.getIdToken()
+
+  //   if (token) {
+  //     const res = await fetch('/api/quotes', {
+  //       method: 'GET',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     })
+
+  //     return res.json()
+  //   } else {
+  //     console.log('nao tem token')
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   fetchFromAPI().then((quotes) => setData(quotes))
+  // }, [])
 
   return (
     <>

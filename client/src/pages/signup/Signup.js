@@ -34,7 +34,6 @@ export default function Signup() {
           value={password}
         />
       </label>
-      {/* <button className='btn'>Sign up</button> */}
       {!isPending && <button className='btn'>sign up</button>}
       {isPending && (
         <button className='btn' disabled>
