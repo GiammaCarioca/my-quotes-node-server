@@ -8,7 +8,7 @@ export const useSignup = () => {
   const [isPending, setIsPending] = useState(false)
   const { dispatch } = useAuthContext()
 
-  const signup = async (email, password) => {
+  const signup = async (email, password, displayName) => {
     setError(null)
     setIsPending(true)
 
@@ -23,6 +23,9 @@ export const useSignup = () => {
       if (!res) {
         throw new Error('Could not complete signup')
       }
+
+      // add display name to user
+      await res.user.updateProfile({ displayName })
 
       // dispatch login action
       dispatch({ type: 'LOGIN', payload: res.user })

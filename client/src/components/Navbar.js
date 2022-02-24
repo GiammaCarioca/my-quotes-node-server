@@ -28,7 +28,7 @@ export default function Navbar() {
 
         {user && (
           <>
-            <li>hello, {user.email}</li>
+            <li>hello, {user.displayName}</li>
             <li>
               <button className='btn' onClick={logout}>
                 Logout

@@ -6,11 +6,12 @@ import './Signup.css'
 export default function Signup() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [displayName, setDisplayName] = useState('')
   const { signup, isPending, error } = useSignup()
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    signup(email, password)
+    signup(email, password, displayName)
   }
 
   return (
@@ -32,6 +33,14 @@ export default function Signup() {
           type='password'
           onChange={(e) => setPassword(e.target.value)}
           value={password}
+        />
+      </label>
+      <label>
+        <span>display name:</span>
+        <input
+          type='text'
+          onChange={(e) => setDisplayName(e.target.value)}
+          value={displayName}
         />
       </label>
       {!isPending && <button className='btn'>sign up</button>}
