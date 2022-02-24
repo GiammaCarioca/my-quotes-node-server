@@ -4,7 +4,7 @@ import { useAuthContext } from '../../hooks/useAuthContext'
 import './Dashboard.css'
 
 import QuotesList from '../../components/QuotesList'
-import UsersList from '../../components/UsersList'
+import QuoteForm from '../../components/QuoteForm'
 
 export default function Dashboard() {
   const [isAdmin, setIsAdmin] = useState(null)
@@ -18,7 +18,7 @@ export default function Dashboard() {
   return (
     <>
       <h2>Dashboard</h2>
-      {isAdmin && <UsersList />}
+      {isAdmin && <QuoteForm />}
       <QuotesList />
     </>
   )
