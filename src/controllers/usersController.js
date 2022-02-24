@@ -4,6 +4,27 @@ function getAllUsers(req, res) {
   })
 }
 
+function signup(req, res) {
+  res.json({
+    message: 'sign up!',
+  })
+}
+
+function login(req, res) {
+  res.json({
+    message: 'log in!',
+  })
+}
+
+function logout(req, res) {
+  res.json({
+    message: 'log out!',
+  })
+}
+
 module.exports = {
   getAllUsers,
+  signup,
+  login,
+  logout,
 }

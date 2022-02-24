@@ -1,40 +1,30 @@
 import { useState, useEffect } from 'react'
-// import { projectAuth } from '../firebase/config'
+
+import { useAuthContext } from '../hooks/useAuthContext'
 
 function QuotesList() {
   const [data, setData] = useState(null)
+  const [token, setToken] = useState(null)
+
+  const { user } = useAuthContext()
+
+  user.getIdToken().then((token) => setToken(token))
 
   useEffect(() => {
-    fetch('/api/quotes')
+    const options = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    }
+
+    if (!token) return
+
+    fetch('/api/quotes', options)
       .then((res) => res.json())
       .then((data) => setData(data))
-  }, [])
-
-  // async function fetchFromAPI() {
-  //   const user = projectAuth.currentUser
-
-  //   if (!user) return
-
-  //   const token = await user.getIdToken()
-
-  //   if (token) {
-  //     const res = await fetch('/api/quotes', {
-  //       method: 'GET',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     })
-
-  //     return res.json()
-  //   } else {
-  //     console.log('nao tem token')
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   fetchFromAPI().then((quotes) => setData(quotes))
-  // }, [])
+  }, [token])
 
   return (
     <>
