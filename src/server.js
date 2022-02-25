@@ -9,6 +9,9 @@ const PORT = process.env.PORT || 3001
 const path = require('path')
 const app = express()
 
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
 /**
  * Decodes the JSON Web Token sent via the frontend app
  * Makes the currentUser (firebase) data available on the body.

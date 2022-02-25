@@ -26,3 +26,13 @@
   text-decoration: none;
   margin-right: 20px;
 }
+
+.navbar a.btn {
+  color: var(--primary-color);
+  margin: 0 10px;
+}
+
+.navbar a.btn:hover {
+  color: #fff;
+  background-color: var(--primary-color);
+}

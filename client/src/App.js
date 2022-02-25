@@ -6,6 +6,7 @@ import './App.css'
 import Login from './pages/login/Login'
 import Signup from './pages/signup/Signup'
 import Dashboard from './pages/dashboard/Dashboard'
+import Create from './pages/create/Create'
 import Navbar from './components/Navbar'
 
 function App() {
@@ -29,6 +30,10 @@ function App() {
               <Route path='/signup'>
                 {user && user.displayName && <Redirect to='/' />}
                 {!user && <Signup />}
+              </Route>
+              <Route path='/create'>
+                {!user && <Redirect to='/login' />}
+                {user && <Create />}
               </Route>
             </Switch>
           </div>

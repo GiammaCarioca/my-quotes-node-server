@@ -1,17 +1,37 @@
 import { useState } from 'react'
+import { useAuthContext } from '../hooks/useAuthContext'
 
-export default function TransactionForm({ uid }) {
+export default function QuoteForm() {
   const [author, setAuthor] = useState('')
   const [text, setText] = useState('')
+  const [token, setToken] = useState(null)
+
+  const { user } = useAuthContext()
+
+  user.getIdToken().then((token) => setToken(token))
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(author, text)
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        author,
+        text,
+      }),
+    }
+
+    if (!token) return
+
+    fetch('/api/quotes/create', requestOptions)
   }
 
   return (
     <>
-      <h3>Add a Quote</h3>
       <form onSubmit={handleSubmit}>
         <label>
           <span>Author:</span>

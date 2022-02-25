@@ -30,6 +30,11 @@ export default function Navbar() {
           <>
             <li>hello, {user.displayName}</li>
             <li>
+              <Link to='/create' className='btn'>
+                Add new quote
+              </Link>
+            </li>
+            <li>
               <button className='btn' onClick={logout}>
                 Logout
               </button>
