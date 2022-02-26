@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
+import { useAdmin } from '../hooks/useAdmin'
 
 import Trashcan from '../assets/trashcan.svg'
 
@@ -8,6 +9,7 @@ function QuotesList() {
   const [data, setData] = useState(null)
   const [token, setToken] = useState(null)
 
+  const { isAdmin } = useAdmin()
   const { user } = useAuthContext()
 
   user.getIdToken().then((token) => setToken(token))
@@ -61,12 +63,14 @@ function QuotesList() {
           {data.map((quote) => (
             <li key={quote.id}>
               {quote.text} -{quote.author}{' '}
-              <img
-                className='delete'
-                onClick={() => handleClick(quote.id)}
-                src={Trashcan}
-                alt='delete icon'
-              />
+              {isAdmin && (
+                <img
+                  className='delete'
+                  onClick={() => handleClick(quote.id)}
+                  src={Trashcan}
+                  alt='delete icon'
+                />
+              )}
             </li>
           ))}
         </ul>

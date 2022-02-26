@@ -1,6 +1,6 @@
-import { useState } from 'react'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { useAuthContext } from './hooks/useAuthContext'
+import { useAdmin } from './hooks/useAdmin'
 
 import './App.css'
 
@@ -12,13 +12,7 @@ import Navbar from './components/Navbar'
 
 function App() {
   const { authIsReady, user } = useAuthContext()
-  const [isAdmin, setIsAdmin] = useState(null)
-
-  if (user) {
-    user
-      .getIdTokenResult()
-      .then((idTokenResult) => setIsAdmin(idTokenResult.claims.admin))
-  }
+  const { isAdmin } = useAdmin()
 
   return (
     <div
