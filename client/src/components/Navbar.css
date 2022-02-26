@@ -21,6 +21,10 @@
   margin-right: auto;
 }
 
+.navbar li.display-name {
+  margin-right: 10px;
+}
+
 .navbar a {
   color: #333;
   text-decoration: none;
@@ -29,7 +33,6 @@
 
 .navbar a.btn {
   color: var(--primary-color);
-  margin: 0 10px;
 }
 
 .navbar a.btn:hover {

@@ -1,6 +1,5 @@
 const express = require('express')
 const quotesRouter = require('./routes/quotesRoutes')
-const usersRouter = require('./routes/usersRoutes')
 
 const { firebaseAdmin } = require('./firebase/config')
 
@@ -33,7 +32,6 @@ async function decodeIDToken(req, res, next) {
 
 app.use(decodeIDToken) // Decodes the Firebase JSON Web Token
 app.use('/api/quotes', quotesRouter)
-app.use('/', usersRouter)
 
 if (process.env.NODE_ENV) {
   // Have Node serve the files for our built React app
