@@ -6,7 +6,7 @@ import './App.css'
 
 import Login from './pages/login/Login'
 import Signup from './pages/signup/Signup'
-import Dashboard from './pages/dashboard/Dashboard'
+import Home from './pages/home/Home'
 import Create from './pages/create/Create'
 import Navbar from './components/Navbar'
 
@@ -29,7 +29,7 @@ function App() {
             <Switch>
               <Route exact path='/'>
                 {!user && <Redirect to='/login' />}
-                {user && <Dashboard />}
+                {user && <Home />}
               </Route>
               <Route path='/login'>
                 {user && <Redirect to='/' />}

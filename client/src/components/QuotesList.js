@@ -1,4 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
+
+import Trashcan from '../assets/trashcan.svg'
 
 import { useAuthContext } from '../hooks/useAuthContext'
 
@@ -10,7 +12,7 @@ function QuotesList() {
 
   user.getIdToken().then((token) => setToken(token))
 
-  useEffect(() => {
+  const fetchQuotes = useCallback(() => {
     const options = {
       method: 'GET',
       headers: {
@@ -26,6 +28,31 @@ function QuotesList() {
       .then((data) => setData(data))
   }, [token])
 
+  useEffect(() => {
+    fetchQuotes()
+  }, [fetchQuotes])
+
+  const handleClick = (id) => {
+    fetch(`/api/quotes/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        id,
+      }),
+    }).then((response) => {
+      if (response.ok) {
+        fetchQuotes()
+      }
+    })
+  }
+
+  if (data && data.length === 0) {
+    return <div className='error'>No quotes to load...</div>
+  }
+
   return (
     <>
       {!data && <p>'Loading...'</p>}
@@ -33,7 +60,13 @@ function QuotesList() {
         <ul>
           {data.map((quote) => (
             <li key={quote.id}>
-              {quote.text} -{quote.author}
+              {quote.text} -{quote.author}{' '}
+              <img
+                className='delete'
+                onClick={() => handleClick(quote.id)}
+                src={Trashcan}
+                alt='delete icon'
+              />
             </li>
           ))}
         </ul>
