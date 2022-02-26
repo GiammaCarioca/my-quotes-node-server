@@ -32,7 +32,9 @@ function QuotesList() {
       {data && (
         <ul>
           {data.map((quote) => (
-            <li key={quote.id}>{quote.text}</li>
+            <li key={quote.id}>
+              {quote.text} -{quote.author}
+            </li>
           ))}
         </ul>
       )}

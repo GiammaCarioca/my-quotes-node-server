@@ -12,7 +12,7 @@ export default function Navbar() {
     <nav className='navbar'>
       <ul>
         <li className='logo'>
-          <Link to='/'>MyApp</Link>
+          <Link to='/'>MyQuotes App</Link>
         </li>
 
         {!user && (

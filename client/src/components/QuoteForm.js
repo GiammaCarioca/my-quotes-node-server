@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useAuthContext } from '../hooks/useAuthContext'
 
+import './QuoteForm.css'
+
 export default function QuoteForm() {
   const [author, setAuthor] = useState('')
   const [text, setText] = useState('')
@@ -32,7 +34,7 @@ export default function QuoteForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='quote-form'>
         <label>
           <span>Author:</span>
           <input
@@ -45,13 +47,14 @@ export default function QuoteForm() {
         <label>
           <span>Quote:</span>
           <input
+            className='quote-area'
             type='textarea'
             required
             onChange={(e) => setText(e.target.value)}
             value={text}
           />
         </label>
-        <button>Add Quote</button>
+        <button className='btn'>Add Quote</button>
       </form>
     </>
   )

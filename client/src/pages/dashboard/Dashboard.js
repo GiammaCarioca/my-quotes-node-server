@@ -5,7 +5,7 @@ import QuotesList from '../../components/QuotesList'
 export default function Dashboard() {
   return (
     <>
-      <h2>Dashboard</h2>
+      <h2>Quotes</h2>
       <QuotesList />
     </>
   )
