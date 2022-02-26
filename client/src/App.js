@@ -21,7 +21,10 @@ function App() {
   }
 
   return (
-    <div className='App'>
+    <div
+      className='App'
+      style={isAdmin && { backgroundColor: 'var(--bg-color-admin)' }}
+    >
       {authIsReady && (
         <BrowserRouter>
           <Navbar />
