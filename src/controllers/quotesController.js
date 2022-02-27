@@ -9,6 +9,7 @@ async function addQuote(req, res) {
     try {
       const ref = firebaseDB.collection('quotes')
       await ref.add({ ...req.body })
+      res.status(201).json(req.body)
     } catch (err) {
       console.log(err)
     }
@@ -23,6 +24,7 @@ async function deleteQuote(req, res) {
   } else {
     try {
       await firebaseDB.collection('quotes').doc(req.body.id).delete()
+      res.status(204).send()
     } catch (err) {
       console.log(err)
     }
@@ -37,10 +39,11 @@ async function getAllQuotes(req, res) {
   } else {
     try {
       const quotes = await firebaseDB.collection('quotes').get()
-      quotes.docs.map((doc) => ({
+      const quotesData = quotes.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }))
+      return res.status(200).json(quotesData)
     } catch (err) {
       console.log(err)
     }
