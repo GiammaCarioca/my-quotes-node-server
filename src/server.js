@@ -1,13 +1,20 @@
 const express = require('express')
+const cors = require('cors')
 const quotesRouter = require('./routes/quotesRoutes')
 
 const { firebaseAdmin } = require('./firebase/config')
 
-const PORT = process.env.PORT || 3001
-
 const path = require('path')
 const app = express()
 
+const PORT = process.env.PORT || 3001
+
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  method: ['GET', 'POST', 'DELETE'],
+}
+
+app.use(cors(corsOptions))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
