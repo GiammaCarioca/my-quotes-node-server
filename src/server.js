@@ -9,7 +9,7 @@ const app = express()
 const PORT = process.env.PORT || 3001
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: ['https://node-on-fire-d851e.web.app', 'http://localhost:3000'],
   method: ['GET', 'POST', 'DELETE'],
 }
 
