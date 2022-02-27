@@ -1,24 +1,21 @@
 # Hand Talk Challenge
 
-## Server
+## Run the server in the development mode
 
-In the root directory, you can run:
+In the root directory:
 
-### `npm run dev`
+```shell
+npm run dev
+```
 
-Runs the server
+## Grant admin role to a user
 
-## Client
+First change the id of the user in the grandAdminRole.js file and then execute the script below:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```shell
+GOOGLE_APPLICATION_CREDENTIALS=serviceAccountKey.json node grantAdminRole.js
+```
 
-In the client directory, you can run:
+## Hosting
 
-### `cd client && npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
+The server is hosted on [Heroku](https://react-node-on-fire.herokuapp.com/api/quotes).
