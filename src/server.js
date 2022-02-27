@@ -4,7 +4,6 @@ const quotesRouter = require('./routes/quotesRoutes')
 
 const { firebaseAdmin } = require('./firebase/config')
 
-const path = require('path')
 const app = express()
 
 const PORT = process.env.PORT || 3001
@@ -39,16 +38,6 @@ async function decodeIDToken(req, res, next) {
 
 app.use(decodeIDToken) // Decodes the Firebase JSON Web Token
 app.use('/api/quotes', quotesRouter)
-
-if (process.env.NODE_ENV) {
-  // Have Node serve the files for our built React app
-  app.use(express.static(path.resolve(__dirname, '../client/build')))
-
-  // All other GET requests not handled before will return our React app
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'))
-  })
-}
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`)
