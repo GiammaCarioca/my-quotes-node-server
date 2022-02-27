@@ -3,7 +3,7 @@ admin.initializeApp()
 
 const auth = admin.auth()
 
-const uid = 'FIeAowvpzvRJ9PxpxQHYM4qrbBv2'
+const uid = 'cFcpduFVNaVKpnck5BeVFrzMqqD2'
 
 const customClaims = {
   admin: true,

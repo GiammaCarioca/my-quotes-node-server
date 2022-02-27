@@ -1,4 +1,4 @@
-const { firebaseDB } = require('../firebase/config')
+const { firebaseDB } = require('../services/firebase')
 
 async function addQuote(req, res) {
   const user = req['currentUser']
@@ -6,11 +6,13 @@ async function addQuote(req, res) {
   if (!user) {
     res.status(403).send('You must be logged in!')
   } else {
-    const ref = firebaseDB.collection('quotes')
-    await ref.add({ ...req.body })
+    try {
+      const ref = firebaseDB.collection('quotes')
+      await ref.add({ ...req.body })
+    } catch (err) {
+      console.log(err)
+    }
   }
-
-  res.json(req.body)
 }
 
 async function deleteQuote(req, res) {
@@ -19,10 +21,12 @@ async function deleteQuote(req, res) {
   if (!user) {
     res.status(403).send('You must be logged in!')
   } else {
-    await firebaseDB.collection('quotes').doc(req.body.id).delete()
+    try {
+      await firebaseDB.collection('quotes').doc(req.body.id).delete()
+    } catch (err) {
+      console.log(err)
+    }
   }
-
-  res.status(204).send()
 }
 
 async function getAllQuotes(req, res) {
@@ -31,14 +35,15 @@ async function getAllQuotes(req, res) {
   if (!user) {
     res.status(403).send('You must be logged in!')
   } else {
-    const quotes = await firebaseDB.collection('quotes').get()
-
-    const quotesData = quotes.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }))
-
-    return res.json(quotesData)
+    try {
+      const quotes = await firebaseDB.collection('quotes').get()
+      quotes.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }))
+    } catch (err) {
+      console.log(err)
+    }
   }
 }
 
